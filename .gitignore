@@ -3,8 +3,7 @@ __pycache__/
 *.pyc
 
 # CS61A ok tool state
-.ok_history
-.ok_storage
+.ok_*
 
 # macOS
 .DS_Store
