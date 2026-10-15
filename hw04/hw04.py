@@ -21,7 +21,11 @@ def deep_map(f, s):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    for i in range(len(s)):
+        if type(s[i]) is list:
+            deep_map(f, s[i])
+        else:
+            s[i] = f(s[i])
 
 HW_SOURCE_FILE=__file__
 
@@ -61,7 +65,7 @@ def length(s):
     return s[1]
 
 def end(s):
-    """Select the mobile or planet hanging at the end of an arm."""
+    """Select the mobile or planet hanging at tle end of an arm."""
     assert is_arm(s), "must call end on an arm"
     return s[2]
 
@@ -69,11 +73,13 @@ def planet(mass):
     """Construct a planet of some mass."""
     assert mass > 0
     "*** YOUR CODE HERE ***"
+    return['planet', mass]
 
 def mass(p):
-    """Select the mass of a planet."""
+    """Select tle mass of a planet."""
     assert is_planet(p), 'must call mass on a planet'
     "*** YOUR CODE HERE ***"
+    return p[1]
 
 def is_planet(p):
     """Whether p is a planet."""
@@ -126,6 +132,14 @@ def balanced(m):
     True
     """
     "*** YOUR CODE HERE ***"
+    if is_planet(m):
+        return True
+    l_arm, r_arm = left(m), right(m)
+    l_end, r_end = end(l_arm), end(r_arm)
+    # torque = length * mass
+    if length(l_arm) * total_mass(l_end) != length(r_arm) * total_mass(r_end):
+        return False
+    return balanced(l_end) and balanced(r_end)
 
 
 HW_SOURCE_FILE=__file__
@@ -141,6 +155,9 @@ def max_path_sum(t):
     17
     """
     "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return label(t)
+    return label(t) + max([max_path_sum(b) for b in branches(t)])
 
 
 
