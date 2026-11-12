@@ -27,6 +27,12 @@ def insert_items(s, before, after):
     True
     """
     "*** YOUR CODE HERE ***"
+    reverse_idx = len(s) - 1
+    while reverse_idx >= 0:
+        if s[reverse_idx] == before:
+            s.insert(reverse_idx + 1, after)
+        reverse_idx -= 1
+    return s
 
 
 def group_by(s, fn):
@@ -40,12 +46,12 @@ def group_by(s, fn):
     {9: [-3, 3], 4: [-2, 2], 1: [-1, 1], 0: [0]}
     """
     grouped = {}
-    for ____ in ____:
-        key = ____
+    for item in s:
+        key = fn(item)
         if key in grouped:
-            ____
+            grouped[key].append(item)
         else:
-            grouped[key] = ____
+            grouped[key] = [item]
     return grouped
 
 
@@ -71,6 +77,12 @@ def count_occurrences(t, n, x):
     2
     """
     "*** YOUR CODE HERE ***"
+    i, r = 0, 0
+    while i < n:
+        if next(t) == x:
+            r += 1
+        i += 1
+    return r
 
 
 def repeated(t, k):
@@ -94,6 +106,15 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
+    prev = next(t)
+    streak = 1
+    for i in t:
+        if prev == i:
+            streak += 1
+            if streak == k:
+                return i
+        else:
+            prev, streak = i, 1
 
 
 def sprout_leaves(t, leaves):
