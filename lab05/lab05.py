@@ -151,6 +151,9 @@ def sprout_leaves(t, leaves):
           2
     """
     "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return tree(label(t), [tree(x) for x in leaves])
+    return tree(label(t), [sprout_leaves(b, leaves) for b in branches(t)])
 
 
 def partial_reverse(s, start):
@@ -166,6 +169,9 @@ def partial_reverse(s, start):
     [1, 2, 7, 6, 5, 3, 4]
     """
     "*** YOUR CODE HERE ***"
+    for i in range((len(s) - start) // 2):
+        j = len(s) - 1 - i
+        s[start + i], s[j] = s[j], s[start + i]
 
 
 
